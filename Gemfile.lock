@@ -370,6 +370,7 @@ DEPENDENCIES
   fog (= 1.38.0)
   jbuilder (~> 2.5)
   jquery-rails
+  json
   mini_magick (= 4.5.1)
   net-ssh
   pg

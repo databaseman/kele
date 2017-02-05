@@ -21,6 +21,7 @@ group :development do
   gem 'web-console', '>= 3.3.0'
 end
 
+gem 'json'
 gem 'devise'
 gem 'bcrypt', platforms: :ruby
 gem 'figaro', '1.0'
