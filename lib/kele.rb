@@ -1,5 +1,6 @@
 require 'httparty'
 require 'json'
+require 'roadmap'
 
 class Kele
   include HTTParty
@@ -39,5 +40,5 @@ class Kele
 		response = self.class.get( "/checkpoints/#{checkpoint_id}", headers: {'authorization' => @auth_token} )
 		JSON.parse(response.body)
 	end
-	
+
 end
