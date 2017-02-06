@@ -31,4 +31,12 @@ class Kele
 		response = self.class.get( "/mentors/#{mentor_id}/student_availability", headers: {'authorization' => @auth_token} )
 		JSON.parse(response.body)
 	end
+	
+	def get_message( page=0 )
+	  if page >= 0
+	    response = self.class.get( '/message_threads', body: { page: page }, headers: {'authorization' => @auth_token} )
+	    JSON.parse( response.body )
+	  else
+	    p "In here"
+	  end   
 end
