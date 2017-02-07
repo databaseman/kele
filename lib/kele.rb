@@ -32,12 +32,32 @@ class Kele
 		JSON.parse(response.body)
 	end
 	
-	def get_messages( pages=0 )
-	  if pages > 0
-	    response = self.class.get( '/message_threads', body: { page: 2 }, headers: {'authorization' => @auth_token} )
+	# Since I don't know how to get more than 10 records per page#, I just going to return the 10 records per page#
+	def get_messages( page=0 )
+	  result = []
+	  if page > 0
+	    response = self.class.get( '/message_threads', body: { page: page }, headers: {'authorization' => @auth_token} )
 	    JSON.parse( response.body )
 	  else
-	    p "In here"
+	    response = self.class.get( '/message_threads', body: { page: 1 }, headers: {'authorization' => @auth_token} )
+      for page in 1..(response["count"]/10 + 1)
+        response = self.class.get( '/message_threads', body: { page: page }, headers: {'authorization' => @auth_token} )
+        result << JSON.parse(response.body)
+      end
+      result
 	  end
-	end 
+	end # get_message
+	
+	def create_message ( email, recipient_id, token, subject, text )
+	  body = 
+	  { 
+	    sender: email,
+      recipient_id: recipient_id,
+      token: token,
+      subject: subject,
+      "stripped-text": text
+    }
+    self.class.post( "/messages", body: body, headers: {'authorization' => @auth_token} ) 
+	end
+	
 end
