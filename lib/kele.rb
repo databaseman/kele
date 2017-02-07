@@ -32,11 +32,12 @@ class Kele
 		JSON.parse(response.body)
 	end
 	
-	def get_message( page=0 )
-	  if page >= 0
-	    response = self.class.get( '/message_threads', body: { page: page }, headers: {'authorization' => @auth_token} )
+	def get_messages( pages=0 )
+	  if pages > 0
+	    response = self.class.get( '/message_threads', body: { page: 2 }, headers: {'authorization' => @auth_token} )
 	    JSON.parse( response.body )
 	  else
 	    p "In here"
-	  end   
+	  end
+	end 
 end
